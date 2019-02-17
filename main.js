@@ -31,6 +31,8 @@ function init(){
     can.addEventListener('mousedown', mouseDown, false);
     can.addEventListener('mouseup', mouseUp, false);
     can.addEventListener('mousemove', mouseMove, false);
+    corte.width = 500;
+    corte.height = 500;
     img.src = './mario.jpg';
     img.onload = function(){
         ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
@@ -38,9 +40,7 @@ function init(){
         drawCorner(square.x+square.w, square.y, contact);
     };
     btn.addEventListener('click', function(){
-        corte.width = 500;
-        corte.height = 500;
-        newCtx.drawImage(img, square.x, square.y, square.w, square.w, 0, 0, 500, 500);
+        drawCanvasCrop();
     });
 }
 
@@ -79,6 +79,7 @@ function mouseMove(e){
     }
     if(dragCorner || dragAll){
         drawCanvas();
+        drawCanvasCrop();
     }
 }
 
@@ -88,12 +89,14 @@ function drawCanvas(){
     square.draw(ctx);
     drawCorner(square.x+square.w, square.y, contact);
 }
-
 function drawCorner(x, y, radius){
     ctx.fillStyle = "#FF0000";
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
     ctx.fill();
+}
+function drawCanvasCrop(){
+    newCtx.drawImage(img, square.x, square.y, square.w, square.w, 0, 0, 500, 500);
 }
 
 init();
