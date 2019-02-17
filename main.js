@@ -16,7 +16,7 @@ function Shape(x, y, w){
     this.w = w ;
 };
 Shape.prototype.draw = function(cctx){
-    cctx.fillStyle = 'rgba(0,0,0,0.2)';
+    cctx.fillStyle = 'rgba(0,0,0,0.3)';
     cctx.fillRect(this.x, this.y, this.w, this.w);
 };
 Shape.prototype.contains = function(mx, my){
@@ -84,16 +84,27 @@ function mouseMove(e){
 }
 
 function drawCanvas(){
+    let radio = square.w*0.5;
     ctx.clearRect(0, 0, can.width, can.height);
     ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
     square.draw(ctx);
     drawCorner(square.x+square.w, square.y, contact);
+    drawCircle(square.x+radio, square.y+radio, radio);
 }
 function drawCorner(x, y, radius){
     ctx.fillStyle = "#FF0000";
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
     ctx.fill();
+}
+function drawCircle(x, y, radius){
+    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#003300';
+    ctx.stroke();
 }
 function drawCanvasCrop(){
     newCtx.drawImage(img, square.x, square.y, square.w, square.w, 0, 0, 500, 500);
