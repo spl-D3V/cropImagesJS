@@ -38,7 +38,7 @@ function init(){
         ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
         square.draw(ctx);
         drawCorner(square.x+square.w, square.y, contact);
-        drawCircle(square.x+square.w*0.5, square.y+square.w*0.5, radio);
+        drawCircle(square.x+square.w*0.5, square.y+square.w*0.5, square.w*0.5);
     };
     btn.addEventListener('click', function(){
         drawCanvasCrop();
